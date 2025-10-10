@@ -274,3 +274,29 @@ Restart MariaDB
 ```
 rc-service mariadb start
 ```
+
+Warning The $cfg['TempDir'] (/var/www/localhost/htdocs/phpmyadmin/tmp/) is not accessible. phpMyAdmin is not able to cache templates and will be slow because of this.
+
+```
+chown -R apache:apache /var/www/localhost/htdocs/phpmyadmin/tmp
+chmod 700 /var/www/localhost/htdocs/phpmyadmin/tmp
+```
+
+Warning The configuration file needs a valid key for cookie encryption. A temporary key was automatically generated for you. Please refer to the documentation.
+
+```
+vi /var/www/localhost/htdocs/phpmyadmin/config.inc.php
+
+```
+
+Add a Blowfish Secret Key
+```
+$cfg['blowfish_secret'] = 'm9f4z2JsklAqxBn7Xy8VpW0cLzMdRqeT'; // Example key
+
+```
+
+#### Power od
+
+```
+poweroff
+```
