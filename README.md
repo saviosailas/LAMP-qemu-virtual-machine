@@ -164,6 +164,24 @@ https://wiki.alpinelinux.org/wiki/MariaDB
 apk add mariadb mariadb-client
 ```
 
+```bash
+localhost:~# apk add mariadb mariadb-client
+(1/11) Installing mariadb-common (10.11.14-r0)
+(2/11) Installing libaio (0.3.113-r2)
+(3/11) Installing libgcc (13.2.1_git20240309-r1)
+(4/11) Installing skalibs (2.14.1.1-r0)
+(5/11) Installing utmps-libs (0.1.2.2-r1)
+(6/11) Installing linux-pam (1.6.0-r0)
+(7/11) Installing libstdc++ (13.2.1_git20240309-r1)
+(8/11) Installing mariadb (10.11.14-r0)
+Executing mariadb-10.11.14-r0.pre-install
+(9/11) Installing mariadb-openrc (10.11.14-r0)
+(10/11) Installing perl (5.38.5-r0)
+(11/11) Installing mariadb-client (10.11.14-r0)
+Executing busybox-1.36.1-r30.trigger
+OK: 429 MiB in 121 packages
+```
+
 The datadir located at `/var/lib/mysql` must be owned by the mysql user and group.
 
 The location of the datadir can be changed by editing the mariadb service file in `/etc/init.d`.
