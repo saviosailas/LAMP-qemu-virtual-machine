@@ -267,3 +267,10 @@ The latest information about MariaDB is available at https://mariadb.org/.
 Consider joining MariaDB's strong and vibrant community:
 https://mariadb.org/get-involved/
 ```
+
+
+Restart MariaDB
+
+```
+rc-service mariadb start
+```
