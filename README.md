@@ -193,3 +193,7 @@ mariadb-secure-installation
  ```
 rc-update add mariadb default
  ```
+Config files:
+
+/etc/my.cnf.d/mariadb-server.cnf	| since 3.9	| First global config file, main directives
+$HOME/.my.cnf |	all	| user name only config directives
