@@ -164,19 +164,32 @@ https://wiki.alpinelinux.org/wiki/MariaDB
 apk add mariadb mariadb-client
 ```
 
+The datadir located at `/var/lib/mysql` must be owned by the mysql user and group.
+
+The location of the datadir can be changed by editing the mariadb service file in `/etc/init.d`.
+
+The new location will also need to be set by adding datadir=<YOUR_DATADIR> in the [mysqld] section in a mariadb configuration file.
+
 Normal initialization of mariadb can be done as follows:
 
 1. Initialize MySQL Data Directory. 
-```mariadb-install-db --user=mysql --datadir=/var/lib/mysql```
+```
+mariadb-install-db --user=mysql --datadir=/var/lib/mysql
+```
 
 2. Start the main service. At this point there will be no root password set.
-
 ```
 rc-service mariadb start
 ```
 
-3. Secure the database by running ```mariadb-secure-installation```
+3. Secure the database by running
+```
+mariadb-secure-installation
+```
 
 4. Setup permissions for managing others users and databases see: Configuration (https://wiki.alpinelinux.org/wiki/MariaDB#Configuration)
 
-5. Add MariaDb to OpenRC. ```rc-update add mariadb default```
+5. Add MariaDb to OpenRC.
+ ```
+rc-update add mariadb default
+ ```
