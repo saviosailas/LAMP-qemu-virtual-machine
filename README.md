@@ -247,14 +247,19 @@ See the MariaDB Knowledgebase at https://mariadb.com/kb
 
 You can start the MariaDB daemon with:
 ```
+
+```bash
 cd '/usr' ; /usr/bin/mariadbd-safe --datadir='/var/lib/mysql'
 ```
 
+```
 You can test the MariaDB daemon with mysql-test-run.pl
 ```
+
+```bash
 cd '/usr/mysql-test' ; perl mariadb-test-run.pl
 ```
-
+```
 Please report any problems at https://mariadb.org/jira
 
 The latest information about MariaDB is available at https://mariadb.org/.
