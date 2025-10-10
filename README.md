@@ -157,3 +157,26 @@ rc-service apache2 restart
 #### Now phpMyAdmin works on apache server
 http://192.168.122.71/phpmyadmin
 
+### Install MySQL (MariaDB) 
+
+https://wiki.alpinelinux.org/wiki/MariaDB
+```
+apk add mariadb mariadb-client
+```
+
+Normal initialization of mariadb can be done as follows:
+
+1. Initialize MySQL Data Directory. 
+```mariadb-install-db --user=mysql --datadir=/var/lib/mysql```
+
+2. Start the main service. At this point there will be no root password set.
+
+```
+rc-service mariadb start
+```
+
+3. Secure the database by running ```mariadb-secure-installation```
+
+4. Setup permissions for managing others users and databases see: Configuration (https://wiki.alpinelinux.org/wiki/MariaDB#Configuration)
+
+5. Add MariaDb to OpenRC. ```rc-update add mariadb default```
