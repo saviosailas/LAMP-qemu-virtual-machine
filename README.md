@@ -110,3 +110,50 @@ Executing busybox-1.36.1-r30.trigger
 Executing ca-certificates-20250911-r0.trigger
 OK: 175 MiB in 109 packages
 ```
+
+
+moved /usr/share/webapp/phpmyadmin to /var/www/localhost/htdocs
+
+edit phpmyadmin.conf
+
+```
+vi /etc/apache2/conf.d/phpmyadmin.conf
+```
+comment the Alias
+```xml
+# Alias /phpmyadmin "/usr/share/webapps/phpmyadmin"
+<Directory "/var/www/localhost/htdocs/phpmyadmin">
+	AddDefaultCharset UTF-8
+	AllowOverride All
+	Options FollowSymlinks
+	<IfModule mod_authz_core.c>
+		Require all granted
+	</IfModule>
+</Directory>
+<Directory "/var/www/localhost/htdocs/phpmyadmin/libraries">
+	<IfModule mod_authz_core.c>
+		Require all denied
+	</IfModule>
+</Directory>
+<Directory "/var/www/localhost/htdocs/phpmyadmin/templates">
+	<IfModule mod_authz_core.c>
+		Require all denied
+	</IfModule>
+</Directory>
+
+```
+
+restart apcahe2
+```
+rc-service apache2 restart
+```
+
+install php83-apache
+```bash
+apk add php83-apache2
+rc-service apache2 restart
+```
+
+#### Now phpMyAdmin works on apache server
+http://192.168.122.71/phpmyadmin
+
