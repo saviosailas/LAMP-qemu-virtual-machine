@@ -98,3 +98,20 @@ localhost:~# rc-service apache2 restart
  * Starting apache2 ...
 AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using ::1. Set the 'ServerName' directive globally to suppress this message
 ```
+
+#### Try starting mariaDB
+
+```bash
+rc-service mariadb status
+```
+
+```bash
+ * status: stopped
+localhost:~# rc-service mariadb start
+ * Datadir '/var/lib/mysql' is empty or invalid.
+ * Run '/etc/init.d/mariadb setup' to create new database.
+ * ERROR: mariadb failed to start
+
+```
+
+```
