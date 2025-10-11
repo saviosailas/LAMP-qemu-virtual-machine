@@ -112,6 +112,22 @@ localhost:~# rc-update add mariadb default
  * service mariadb added to runlevel default
 ```
 
+### Restart MariaDB service
+```bash
+rc-service mariadb restart
+```
+
+```bash
+localhost:~# rc-service mariadb status
+ * status: stopped
+localhost:~# rc-serice mariadb start
+-sh: rc-serice: not found
+localhost:~# rc-service mariadb start
+ * Starting mariadb ...
+251011 10:55:21 mysqld_safe Logging to syslog.
+251011 10:55:21 mysqld_safe Starting mariadbd daemon with databases from /var/lib/mysql      [ ok ]
+```
+
 
 ### Restart apache server
 ```bash
@@ -125,7 +141,7 @@ localhost:~# rc-service apache2 restart
 AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using ::1. Set the 'ServerName' directive globally to suppress this message
 ```
 
-#### Try starting mariaDB
+#### Initialize mariaDB
 
 ```bash
 rc-service mariadb status
@@ -137,7 +153,223 @@ localhost:~# rc-service mariadb start
  * Datadir '/var/lib/mysql' is empty or invalid.
  * Run '/etc/init.d/mariadb setup' to create new database.
  * ERROR: mariadb failed to start
+```
+
+```bash
+# Initialize MySQL Data Directory. 
+mariadb-install-db --user=mysql --datadir=/var/lib/mysql
+```
+
+
+```bash
+rc-service mariadb start
+```
+
+```bash
+localhost:~# rc-service mariadb start
+ * Starting mariadb ...
+251011 10:55:21 mysqld_safe Logging to syslog.
+251011 10:55:21 mysqld_safe Starting mariadbd daemon with databases from /var/lib/mysql      [ ok ]
+```
+
+
+### Secure database (Add root user password)
+
+```bash
+mariadb-secure-installation
+```
+
+```bash
+localhost:~# mysql_secure_installation <<EOF
+> 
+> y
+> secret
+> secret
+> y
+> y
+> y
+> y
+> EOF
+
+NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MariaDB
+      SERVERS IN PRODUCTION USE!  PLEASE READ EACH STEP CAREFULLY!
+
+In order to log into MariaDB to secure it, we'll need the current
+password for the root user. If you've just installed MariaDB, and
+haven't set the root password yet, you should just press enter here.
+
+stty: standard input: Not a tty
+Enter current password for root (enter for none): 
+stty: standard input: Not a tty
+OK, successfully used password, moving on...
+
+Setting the root password or using the unix_socket ensures that nobody
+can log into the MariaDB root user without the proper authorisation.
+
+You already have your root account protected, so you can safely answer 'n'.
+
+Switch to unix_socket authentication [Y/n] Enabled successfully!
+Reloading privilege tables..
+ ... Success!
+
+
+You already have your root account protected, so you can safely answer 'n'.
+
+Change the root password? [Y/n] You already have your root account protected, so you can safely answer 'n'.
+
+Change the root password? [Y/n] You already have your root account protected, so you can safely answer 'n'.
+
+Change the root password? [Y/n] stty: standard input: Not a tty
+New password: 
+Re-enter new password: 
+stty: standard input: Not a tty
+Password updated successfully!
+Reloading privilege tables..
+ ... Success!
+
+
+By default, a MariaDB installation has an anonymous user, allowing anyone
+to log into MariaDB without having to have a user account created for
+them.  This is intended only for testing, and to make the installation
+go a bit smoother.  You should remove them before moving into a
+production environment.
+
+Remove anonymous users? [Y/n]  ... Success!
+
+Normally, root should only be allowed to connect from 'localhost'.  This
+ensures that someone cannot guess at the root password from the network.
+
+Disallow root login remotely? [Y/n]  ... Success!
+
+By default, MariaDB comes with a database named 'test' that anyone can
+access.  This is also intended only for testing, and should be removed
+before moving into a production environment.
+
+Remove test database and access to it? [Y/n]  - Dropping test database...
+ ... Success!
+ - Removing privileges on test database...
+ ... Success!
+
+Reloading the privilege tables will ensure that all changes made so far
+will take effect immediately.
+
+Reload privilege tables now? [Y/n]  ... Success!
+
+Cleaning up...
+
+All done!  If you've completed all of the above steps, your MariaDB
+installation should now be secure.
+
+Thanks for using MariaDB!
+```
+
+### Setup password for MariaDB
+
+```bash
+mysql -u root -r "ALTER USER 'root'@'localhost' IDENTIFIED BT 'toor';"
+```
+
+
+### Reset password if you forgot the MariaDB password ***
+
+#### 1. Stop MariaDB
+```bash
+rc-service mariadb stop
+```
+
+```bash
+localhost:~# rc-service mariadb stop
+ * Stopping mariadb ...                                                                      [ ok ]
+```
+
+#### 2. start MariaDB in safe mode 
+
+```bash
+mysql_safe --skip-grant-tables &
+```
+
+```bash
+localhost:~# mysqld_safe --skip-grant-tables &
+localhost:~# 251011 11:24:54 mysqld_safe Logging to '/var/lib/mysql/localhost.err'.
+251011 11:24:54 mysqld_safe Starting mariadbd daemon with databases from /var/lib/mysql
+```
+
+#### 3. Login in as root without passsword (In new terminal)
+```bash
+mysql -u root
+```
+
+```bash
+localhost:~#  mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 3
+Server version: 10.11.14-MariaDB Alpine Linux
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]>
+```
+
+#### 4. Update root password 
+```sql
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'toor';
+```
+
+
+```sql
+FLUSH PRIVILEGES;
+```
+
+```sql
+quit;
+```
+
+
 
 ```
+```
+```sql
+MariaDB [(none)]>   ALTER USER 'root'@'localhost' IDENTIFIED BY 'new_secure_password';
+ERROR 1290 (HY000): The MariaDB server is running with the --skip-grant-tables option so it cannot execute this statement
+
+
+MariaDB [(none)]>   FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.016 sec)
+
+
+MariaDB [(none)]>   quit;
+```
+
+
+#### 5. shutdown MariaDB
+
+```bash
+mysqladmin -u root -p shutdown
+```
+
+
+```bash
+localhost:~# mysqladmin -u root -p shutdown
+Enter password: 
+```
+
+
+#### 6. Start MariaDB service
+```bash
+rc-service mariadb start
+```
+
+```bash
+localhost:~# rc-service mariadb start
+ * Starting mariadb ...
+251011 11:27:12 mysqld_safe Logging to syslog.
+251011 11:27:12 mysqld_safe Starting mariadbd daemon with databases from /var/lib/mysql     [ ok ]
+```
+
+
+
+
 
 ```
