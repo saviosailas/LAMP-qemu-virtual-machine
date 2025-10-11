@@ -5,8 +5,6 @@
 ```bash
 sh combine.sh
 ```
-```
-```
 
 
 #### This is fresh vm created after installing OS. 
