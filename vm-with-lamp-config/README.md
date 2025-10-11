@@ -1,3 +1,11 @@
+### This folder contain chunks of virtual machine configured with Apache, MariaDB, PHP and phpMyAdmin
+
+#### run below command to combine all the chunks to generate 
+
+```bash
+sh combine.sh
+```
+
 ### This VM is configured with Apache2, MariaDB, PHP and phpMyAdmin
 
 ```bash
