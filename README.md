@@ -295,7 +295,7 @@ $cfg['blowfish_secret'] = 'm9f4z2JsklAqxBn7Xy8VpW0cLzMdRqeT'; // Example key
 
 ```
 
-#### Power od
+#### Power off
 
 ```
 poweroff
