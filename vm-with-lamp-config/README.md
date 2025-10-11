@@ -1,6 +1,11 @@
 ### This VM is configured with Apache2, MariaDB, PHP and phpMyAdmin
 
 ```bash
+apk add apache2 phpmyadmin php83-apache2 mariadb mariadb-client
+```
+
+
+```bash
 localhost:~# apk add apache2 phpmyadmin php83-apache2 mariadb mariadb-client
 (1/65) Installing apr (1.7.5-r0)
 (2/65) Installing libexpat (2.7.3-r0)
