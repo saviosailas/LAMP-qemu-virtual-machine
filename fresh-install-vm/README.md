@@ -10,3 +10,6 @@ sh combine.sh
 #### This is fresh vm created after installing OS. 
 ##### No additional software is installed in this image.
 ##### This VM configured with community repository for apk
+
+
+### Not useful for LAMP setup due to low hard disk space
