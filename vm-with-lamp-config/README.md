@@ -92,6 +92,21 @@ Executing ca-certificates-20250911-r0.trigger
 OK: 429 MiB in 121 packages
 ```
 
+### auto start service at 'default'
+```bash
+rc-update add apache2 default
+```
+
+```bash
+localhost:~# rc-update add apache2 default
+ * service apache2 added to runlevel default
+
+```
+
+```bash
+rc-update add mariadb default
+```
+
 ### Restart apache server
 ```bash
 rc-service apache2 restart
