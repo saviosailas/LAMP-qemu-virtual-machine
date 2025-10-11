@@ -1,6 +1,6 @@
 ### This folder contain chunks of virtual machine configured with Apache, MariaDB, PHP and phpMyAdmin
 
-#### run below command to combine all the chunks to generate 
+#### run below command to combine all the chunks to generate "alpinelinux3.20-vir-721M-3GB.qcow2"
 
 ```bash
 sh combine.sh
