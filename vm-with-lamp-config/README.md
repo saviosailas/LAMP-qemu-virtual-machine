@@ -86,4 +86,15 @@ Executing busybox-1.36.1-r30.trigger
 Executing ca-certificates-20250911-r0.trigger
 OK: 429 MiB in 121 packages
 ```
+
+### Restart apache server
+```bash
+rc-service apache2 restart
+```
+
+```bash
+localhost:~# rc-service apache2 restart
+ * Caching service dependencies ...                                                                                                                    [ ok ]
+ * Starting apache2 ...
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using ::1. Set the 'ServerName' directive globally to suppress this message
 ```
