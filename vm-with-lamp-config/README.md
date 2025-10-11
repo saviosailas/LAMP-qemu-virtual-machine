@@ -107,6 +107,12 @@ localhost:~# rc-update add apache2 default
 rc-update add mariadb default
 ```
 
+```bash
+localhost:~# rc-update add mariadb default
+ * service mariadb added to runlevel default
+```
+
+
 ### Restart apache server
 ```bash
 rc-service apache2 restart
