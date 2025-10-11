@@ -87,4 +87,3 @@ Executing ca-certificates-20250911-r0.trigger
 OK: 429 MiB in 121 packages
 ```
 ```
-```
