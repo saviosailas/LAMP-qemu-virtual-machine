@@ -369,7 +369,7 @@ localhost:~# rc-service mariadb start
 ```
 
 
-
+## htdocs at /var/www/localhost/htdocs
 
 
 ```
