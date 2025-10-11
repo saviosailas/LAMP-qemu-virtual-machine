@@ -304,10 +304,15 @@ poweroff
 ### Virtual machine information
 
 OS: Alpine linux 3.20 (lite version for vm)
+
 user: root, password: root
+
 remote login: openssh, allowed root login via password
+
 RAM: 512 MB
+
 Storage: 700 MB
+
 Architecture: x86_64
 
 Installed software: Apache2, MariaDB, php, phpMyAdmin
