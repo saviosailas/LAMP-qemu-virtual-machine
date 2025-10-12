@@ -53,3 +53,19 @@ MariaDB [(none)]> select database();
 +------------+
 1 row in set (0.003 sec)
 ```
+
+### List tables
+
+```sql
+show tables;
+```
+
+```bash
+MariaDB [user_db]> show tables;
++-------------------+
+| Tables_in_user_db |
++-------------------+
+| user_info         |
++-------------------+
+1 row in set (0.006 sec)
+```
