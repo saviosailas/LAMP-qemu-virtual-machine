@@ -59,6 +59,9 @@ MariaDB [(none)]> select database();
 ```sql
 show tables;
 ```
+```sql
+show tables from your_database;
+```
 
 ```bash
 MariaDB [user_db]> show tables;
@@ -69,3 +72,45 @@ MariaDB [user_db]> show tables;
 +-------------------+
 1 row in set (0.006 sec)
 ```
+
+### List columns
+
+```sql
+show columns from your_table_name;
+```
+```sql
+show columns from your_table_name from your_database;
+```
+
+```bash
+MariaDB [user_db]> show columns from user_info;
++-----------+--------------+------+-----+---------+----------------+
+| Field     | Type         | Null | Key | Default | Extra          |
++-----------+--------------+------+-----+---------+----------------+
+| roll_numb | int(11)      | NO   | PRI | NULL    | auto_increment |
+| name      | varchar(80)  | NO   |     | NULL    |                |
+| age       | int(3)       | NO   |     | NULL    |                |
+| class     | varchar(100) | NO   |     | NULL    |                |
++-----------+--------------+------+-----+---------+----------------+
+4 rows in set (0.013 sec)
+```
+
+### fetch data from table
+
+```sql
+select * from your_table;
+```
+
+```bash
+MariaDB [user_db]> select * from user_info;
++-----------+-------+-----+------------------------+
+| roll_numb | name  | age | class                  |
++-----------+-------+-----+------------------------+
+|         1 | savio |  28 | B.Sc. computer science |
++-----------+-------+-----+------------------------+
+1 row in set (0.002 sec)
+```
+
+
+
+
